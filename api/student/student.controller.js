@@ -37,7 +37,7 @@ function signUp(req, res) {
 }
 
 /**
- * Ejecuta login del estudiante en la base de datos 
+ * Ejecuta login del estudiante en la aplicacion
  */
 function signIn(req, res) {
   req.body.password = crypto.createHmac('sha256', req.body.password).digest('hex')
