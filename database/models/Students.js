@@ -4,7 +4,7 @@ const sequelize = require('../connection')()
 /**
  * Definimos modelo que representara a nuestro estudiante en el ORM
  */
-const Student = sequelize.define('Student', {
+const Student = sequelize.define('students', {
   dni_students: { 
     type: Sequelize.STRING(20),
     primaryKey: true, 
@@ -33,7 +33,11 @@ const Student = sequelize.define('Student', {
   password: {
     type: Sequelize.STRING(100),
     allowNull: false
-  }
+  },
+  createdAt: Sequelize.DATE,
+  updatedAt: Sequelize.DATE
 })
 
-return Student
+//Student.sync({ force: true })
+
+module.exports = Student

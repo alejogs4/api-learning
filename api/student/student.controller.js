@@ -7,7 +7,7 @@ const { codes } = require('../utils')
  */
 function handleError(res, statusCode = codes.SERVER_ERROR) {
   return err => {
-    res.status(statusCode).send(err)
+    res.status(statusCode).send({err, message: err.message})
   }
 }
 
@@ -18,6 +18,10 @@ function manageData(res, statusCode = codes.OK_CODE) {
   return student => {
     res.status(statusCode).send(student)
   }
+}
+
+function convertToJson(relation) {
+  return relation.toJSON()
 }
 
 /**
@@ -32,6 +36,26 @@ function signUp(req, res) {
     .catch(handleError(res))
 }
 
+/**
+ * Ejecuta login del estudiante en la base de datos 
+ */
+function signIn(req, res) {
+  req.body.password = crypto.createHmac('sha256', req.body.password).digest('hex')
+
+  const { password, email } = req.body
+  Student.find({
+    attributes: ['dni_students', 'name', 'lastname', 'email', 'degree'],
+    where: { email, password  }
+  })
+  .then(student => {
+    if(!student) throw new Error('El email o contraseña son equivocados')
+    else return convertToJson(student)
+  })
+  .then(manageData(res, codes.OK_CODE))
+  .catch(handleError(res))
+}
+
 module.exports = {
-  signUp
+  signUp,
+  signIn
 }
