@@ -1,15 +1,7 @@
-const Student = require('../../database/models/Students')
+const { Student } = require('../../database/index')
+const { createToken } = require('../../auth/token')
 const crypto = require('crypto')
-const { codes } = require('../utils')
-
-/**
- * Maneja errores en las peticiones a la base de datos 
- */
-function handleError(res, statusCode = codes.SERVER_ERROR) {
-  return err => {
-    res.status(statusCode).send({err, message: err.message})
-  }
-}
+const { codes, handleError, convertToJson } = require('../utils')
 
 /**
  * Maneja la informacion del estudiante 
@@ -18,10 +10,6 @@ function manageData(res, statusCode = codes.OK_CODE) {
   return student => {
     res.status(statusCode).send(student)
   }
-}
-
-function convertToJson(relation) {
-  return relation.toJSON()
 }
 
 /**
@@ -41,8 +29,8 @@ function signUp(req, res) {
  */
 function signIn(req, res) {
   req.body.password = crypto.createHmac('sha256', req.body.password).digest('hex')
-
   const { password, email } = req.body
+
   Student.find({
     attributes: ['dni_students', 'name', 'lastname', 'email', 'degree'],
     where: { email, password  }
@@ -50,6 +38,11 @@ function signIn(req, res) {
   .then(student => {
     if(!student) throw new Error('El email o contraseña son equivocados')
     else return convertToJson(student)
+  })
+  .then(student => {
+    // Creamos el token con la informacion del estudiante
+    const token = `Bearer ${createToken(student)}`
+    return { student, token }
   })
   .then(manageData(res, codes.OK_CODE))
   .catch(handleError(res))

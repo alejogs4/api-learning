@@ -4,6 +4,25 @@ const codes = {
   SERVER_ERROR: 500
 }
 
+/**
+ * Maneja errores que pueden pasar en la aplicación
+ */
+function handleError(res, statusCode = codes.SERVER_ERROR) {
+  return err => {
+    res.status(statusCode).send({err, message: err.message})
+  }
+}
+
+/**
+ * Convierte un objeto de sequelize en un objeto JSONs 
+ */
+function convertToJson(relation) {
+  return relation.toJSON()
+}
+
+
 module.exports = {
-  codes
+  codes,
+  handleError,
+  convertToJson
 }
