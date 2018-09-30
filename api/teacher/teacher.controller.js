@@ -1,6 +1,5 @@
 const { Teacher } = require('../../database/')
-const { codes, handleError, convertToJson } = require('../utils')
-const crypto = require('crypto')
+const { codes, handleError, convertToJson, encrypt } = require('../utils')
 
 
 function manageData(res, statusCode = codes.OK_CODE) {
@@ -13,7 +12,7 @@ function manageData(res, statusCode = codes.OK_CODE) {
  * Registra a un profesor en la aplicacion 
  */
 function signUp(req, res) {
-  req.body.password = crypto.createHmac('sha256', req.body.password).digest('hex')
+  req.body.password = encrypt(req.body.password)
   const teacher = Teacher.build(req.body)
 
   return teacher.save()
