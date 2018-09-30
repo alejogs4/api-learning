@@ -1,7 +1,6 @@
 const { Student } = require('../../database/index')
 const { createToken } = require('../../auth/token')
-const crypto = require('crypto')
-const { codes, handleError, convertToJson } = require('../utils')
+const { codes, handleError, convertToJson, encrypt } = require('../utils')
 
 /**
  * Maneja la informacion del estudiante 
@@ -16,7 +15,7 @@ function manageData(res, statusCode = codes.OK_CODE) {
  * Registra a un estudiante en la base de datos
  */
 function signUp(req, res) {
-  req.body.password = crypto.createHmac('sha256', req.body.password).digest('hex')
+  req.body.password = encrypt(req.body.password)
   const newStudent = Student.build(req.body)
 
   return newStudent.save()
@@ -28,7 +27,7 @@ function signUp(req, res) {
  * Ejecuta login del estudiante en la aplicacion
  */
 function signIn(req, res) {
-  req.body.password = crypto.createHmac('sha256', req.body.password).digest('hex')
+  req.body.password = encrypt(req.body.password)
   const { password, email } = req.body
 
   Student.find({
