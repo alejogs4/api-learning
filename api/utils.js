@@ -1,3 +1,5 @@
+const crypto = require('crypto')
+
 const codes = {
   OK_CODE: 200,
   CREATED: 201,
@@ -16,13 +18,16 @@ function handleError(res, statusCode = codes.SERVER_ERROR) {
 /**
  * Convierte un objeto de sequelize en un objeto JSONs 
  */
-function convertToJson(relation) {
-  return relation.toJSON()
-}
+const convertToJson = relation => relation.toJSON()
 
+/**
+ * Encrypta la cadena de texto que se le pasa como parametro
+ */
+const encrypt = text => crypto.createHmac('sha256', text).digest('hex')
 
 module.exports = {
   codes,
   handleError,
-  convertToJson
+  convertToJson,
+  encrypt
 }
