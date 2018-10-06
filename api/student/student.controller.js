@@ -1,12 +1,13 @@
 const { Student } = require('../../database/index')
 const { createToken } = require('../../auth/token')
-const { codes, handleError, convertToJson, encrypt } = require('../utils')
+const { codes, handleError, convertToJson, encrypt, deletePassword } = require('../utils')
 
 /**
  * Maneja la informacion del estudiante 
  */
 function manageData(res, statusCode = codes.OK_CODE) {
   return student => {
+    deletePassword(student)
     res.status(statusCode).send(student)
   }
 }
@@ -19,6 +20,7 @@ function signUp(req, res) {
   const newStudent = Student.build(req.body)
 
   return newStudent.save()
+    .then(convertToJson)
     .then(manageData(res, codes.CREATED))
     .catch(handleError(res))
 }

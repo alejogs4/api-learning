@@ -1,9 +1,10 @@
 const { Teacher } = require('../../database/')
-const { codes, handleError, convertToJson, encrypt } = require('../utils')
+const { codes, handleError, convertToJson, encrypt, deletePassword } = require('../utils')
 
 
 function manageData(res, statusCode = codes.OK_CODE) {
   return teacher => {
+    deletePassword(teacher)
     res.status(statusCode).send(teacher)
   }
 }
@@ -16,6 +17,7 @@ function signUp(req, res) {
   const teacher = Teacher.build(req.body)
 
   return teacher.save()
+    .then(convertToJson)
     .then(manageData(res, codes.CREATED))
     .catch(handleError(res))
 }

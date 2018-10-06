@@ -1,0 +1,137 @@
+openapi: 3.0.0
+info:
+  title: API Edukt
+  description: Documentacion de la API del proyecto Edukt, incluyen rutas donde se realizaran las consultas y ejemplos de uso
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:3001/api/v1
+    description: Servidor donde se realizaran todas las consultas a la API
+
+paths:
+  ##########################
+  # Estudiantes
+  ############################
+  /student:
+    post:
+      summary: Ruta que permite el registro del usuario como estudiante en el sistema.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                dni_students:
+                  type: string
+                  example: 1432678355
+                name:
+                  type: string
+                  example: Jose
+                lastname:
+                  type: string
+                  example: moroco
+                birthday:
+                  type: string
+                  example: 2000-10-10T05:30:00.175Z
+                degree:
+                  type: string
+                  example: Negociante
+                email:
+                  type: string
+                  example: moroco@gmail.com
+                password:
+                  type: string
+                  example: A124T342
+      responses:
+        '201':    # status code
+          description: Json con la informacion del usuario recien creado
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties: 
+                  dni_students: 
+                    type: string
+                    example: 1432678355
+                  name:
+                    type: string
+                    example: Jose
+                  lastname:
+                    type: string
+                    example: moroco
+                  birthday:
+                    type: string
+                    example: 2000-10-10T05:30:00.175Z
+                  degree:
+                    type: string
+                    example: Negociante
+                  email:
+                    type: string
+                    example: moroco@gmail.com
+                  updatedAt:
+                    type: string
+                    example: 2018-10-06T15:50:48.177Z
+                  createdAt:
+                    type: string
+                    example: 2018-10-06T15:50:48.177Z
+  /student/login:
+    post:
+      summary: Ruta que permite realizar el login del estudiante
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: 
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: alejogs4@gmail.com
+                password:
+                  type: string
+                  example: ARWfdfj134
+      responses:
+        '200':
+          description: Json con la informacion del usuario y token de autenticacion
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties: 
+                  student:
+                    type: object
+                    properties:
+                      dni_students:
+                        type: string
+                        example: 1017270188
+                      name: 
+                        type: string
+                        example: Alejandro
+                      lastname: 
+                        type: string
+                        example: García Serna
+                      email:
+                        type: string
+                        example: alejogs4@gmail.com
+                      degree:
+                        type: string
+                        example: Ingeniero
+                  token:
+                    type: string
+                    example: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkbmlfc3R1ZGVudHMiOiIxMDE3MjcwMTg4IiwibmFtZSI6IkFsZWphbmRybyIsImxhc3RuYW1lIjoiR2FyY8OtYSBTZXJuYSIsImVtYWlsIjoiYWxlam9nczRAZ21haWwuY29tIiwiZGVncmVlIjoiSW5nZW5pZXJvIiwiaWF0IjoxNTM4ODQzMDAzLCJleHAiOjE1MzkwMTU4MDN9.wiSWQ3KSbnaI5lOAQwO2Pt6eHafhmct9Q7btwZvhdPM"
+        '500':
+          description: Json con el mensaje cuando ocurre algun error como error en el login
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: El email o contraseña son equivocados
+
+      
+
+
+

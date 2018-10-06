@@ -25,9 +25,16 @@ const convertToJson = relation => relation.toJSON()
  */
 const encrypt = text => crypto.createHmac('sha256', text).digest('hex')
 
+const deletePassword = obj => {
+  if(obj.hasOwnProperty('password')) {
+    delete obj.password
+  }
+}
+
 module.exports = {
   codes,
   handleError,
   convertToJson,
-  encrypt
+  encrypt,
+  deletePassword
 }
