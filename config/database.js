@@ -1,7 +1,7 @@
 module.exports = {
   database: 'edukt',
   username: 'postgres',
-  password: '',
+  password: 'zgnxbiaj21',
   host: 'localhost',
   dialect: 'postgres',
   pool: {
