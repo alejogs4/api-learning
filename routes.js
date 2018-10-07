@@ -4,7 +4,7 @@
 const Student = require('./api/student')
 const Teacher = require('./api/teacher')
 // Modulo para levantar pagina de documentacion
-const { swaggerUi, swaggerDocument } = require('./config/swagger')
+const { swaggerUi, swaggerDocument } = require('./swagger')
 
 module.exports = app => {
   app.use(Student)

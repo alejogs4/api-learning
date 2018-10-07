@@ -23,7 +23,10 @@ const convertToJson = relation => relation.toJSON()
 /**
  * Encrypta la cadena de texto que se le pasa como parametro
  */
-const encrypt = text => crypto.createHmac('sha256', text).digest('hex')
+const encrypt = text => {
+ console.log(text)
+ return  crypto.createHmac('sha256', text).digest('hex')
+}
 
 const deletePassword = obj => {
   if(obj.hasOwnProperty('password')) {

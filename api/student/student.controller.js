@@ -16,6 +16,7 @@ function manageData(res, statusCode = codes.OK_CODE) {
  * Registra a un estudiante en la base de datos
  */
 function signUp(req, res) {
+  console.log(req.body)
   req.body.password = encrypt(req.body.password)
   const newStudent = Student.build(req.body)
 

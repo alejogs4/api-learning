@@ -6,7 +6,9 @@ info:
 
 servers:
   - url: http://localhost:3001/api/v1
-    description: Servidor donde se realizaran todas las consultas a la API
+    description: Servidor donde se realizaran todas las consultas a la API en desarrollo
+  - url: http://167.99.99.255:3001/api/v1
+    description: servidor de desarrollo
 
 paths:
   ##########################
