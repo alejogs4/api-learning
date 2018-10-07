@@ -4,7 +4,7 @@ const sequelize = require('../connection')()
 /**
  * Definimos el modelo que representara al profesor
  */
-const Teacher = sequelize.define('teachers', {
+const Teacher = sequelize.define('teacher', {
   dni_teacher: { 
     type: Sequelize.STRING(20), 
     primaryKey: true,
@@ -31,5 +31,5 @@ const Teacher = sequelize.define('teachers', {
     allowNull: false
   }
 })
-// Teacher.sync({ force: true })
+Teacher.sync({ force: true })
 module.exports = Teacher
