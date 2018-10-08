@@ -35,5 +35,5 @@ const Teacher = sequelize.define('teacher', {
   createdAt: false,
   updatedAt: false
 })
-// Teacher.sync()
+// Teacher.sync({ force: true })
 module.exports = Teacher
