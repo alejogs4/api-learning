@@ -29,7 +29,11 @@ const Teacher = sequelize.define('teacher', {
   password: {
     type: Sequelize.STRING(100),
     allowNull: false
-  }
+  }, 
+}, {
+  tableName: 'teacher',
+  createdAt: false,
+  updatedAt: false
 })
-Teacher.sync({ force: true })
+// Teacher.sync()
 module.exports = Teacher
