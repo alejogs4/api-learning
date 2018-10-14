@@ -27,10 +27,15 @@ VALUES('1017345812', 'jaime', 'Serna', '1999-11-09 12:50:35', 'jaime78@gmail.com
 insert into teacher(dni_teacher, name, lastname, birthday, email, password)
 VALUES('1017345865', 'juan', 'Garcia', '1962-11-09 12:50:35', 'juan@gmail.com','rewqed');
 
-
 insert into teacher(dni_teacher, name, lastname, birthday, email, password)
 VALUES('1017345836', 'Dina', 'Cañas', '1999-11-09 12:50:35', 'scbdina@gmail.com','1234567');
--- 
+
+--subjects
+INSERT INTO subject(name, level) VALUES ('Física de campos', 'Medio');
+INSERT INTO subject(name, level) VALUES ('Termodinámica', 'Medio');
+INSERT INTO subject(name, level) VALUES ('Estadística', 'Medio');
+INSERT INTO subject(name, level) VALUES ('Matemáticas', 'Medio');
+INSERT INTO subject(name, level) VALUES ('Algebra lineal', 'Medio');
 
 -- Articles
 insert into article(dni_teacher,id_subject, fecha, body, title, image, description) values('1017345879', 1, '2018-07-10 00:00:00', 'abcdefg', 'Titulo','Titulo 1', 'Descripcion');
