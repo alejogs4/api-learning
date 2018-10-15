@@ -1,13 +1,12 @@
-const { Article, Teacher } = require('../../database/index')
-const { createToken } = require('../../auth/token')
-const { codes, handleError, convertToJson, encrypt, deletePassword } = require('../utils')
+const { Article } = require('../../database/index')
+const { codes, handleError, convertToJson } = require('../utils')
 
 /**
  * Maneja la informacion del articulo
  */
 function manageData(res, statusCode = codes.OK_CODE) {
-  return articulo => {
-    res.status(statusCode).send(articulo)
+  return article => {
+    res.status(statusCode).send(article)
   }
 }
 
@@ -15,9 +14,9 @@ function manageData(res, statusCode = codes.OK_CODE) {
 getArticleByDate = function(req, res) {
   const fecha = req.params.fecha
   Article.findAll({
-    where: { fecha },
-    // include: [{model: Teacher}]
+    where: { fecha }
   })
+  .then(convertToJson)
   .then(manageData(res, codes.OK_CODE))
   .catch(handleError(res))
 }

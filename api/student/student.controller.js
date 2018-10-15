@@ -1,6 +1,12 @@
 const { Student } = require('../../database/index')
 const { createToken } = require('../../auth/token')
-const { codes, handleError, convertToJson, encrypt, deletePassword } = require('../utils')
+const { 
+  codes, 
+  handleError, 
+  convertToJson, 
+  encrypt, 
+  deletePassword,
+  generateToken } = require('../utils')
 
 /**
  * Maneja la informacion del estudiante 
@@ -41,11 +47,7 @@ function signIn(req, res) {
     if(!student) throw new Error('El email o contraseña son equivocados')
     else return convertToJson(student)
   })
-  .then(student => {
-    // Creamos el token con la informacion del estudiante
-    const token = `Bearer ${createToken(student)}`
-    return { student, token }
-  })
+  .then(generateToken)
   .then(manageData(res, codes.OK_CODE))
   .catch(handleError(res))
 }

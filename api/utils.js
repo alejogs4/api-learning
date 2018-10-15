@@ -1,9 +1,11 @@
 const crypto = require('crypto')
-
+const { createToken } = require('../auth/token')
+ 
 const codes = {
   OK_CODE: 200,
   CREATED: 201,
-  SERVER_ERROR: 500
+  SERVER_ERROR: 500,
+  NOT_FOUND: 404
 }
 
 /**
@@ -34,10 +36,16 @@ const deletePassword = obj => {
   }
 }
 
+const generateToken = data => {
+  const token = `${createToken(data)}`
+  return { data, token }
+}
+
 module.exports = {
   codes,
   handleError,
   convertToJson,
   encrypt,
-  deletePassword
+  deletePassword,
+  generateToken
 }
