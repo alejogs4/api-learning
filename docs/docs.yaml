@@ -132,6 +132,8 @@ paths:
                   message:
                     type: string
                     example: El email o contraseña son equivocados
+  /teacher:
+    
 
       
 

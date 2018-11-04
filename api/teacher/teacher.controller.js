@@ -1,4 +1,4 @@
-const { Teacher } = require('../../database/')
+const { Teacher, TeacherScore } = require('../../database/')
 const { 
   codes, 
   handleError, 
@@ -45,7 +45,22 @@ function signIn(req, res) {
   .catch(handleError(res))
 }
 
+function getTeachersByScore(req, res) {
+  return Teacher.findAll({ 
+    include:[{ model: TeacherScore}], 
+    order: [[ TeacherScore, 'score', 'DESC' ]]
+  })
+  .then(teachers => {
+    const teachersFounded = JSON.parse(JSON.stringify(teachers))
+    const teachersWithScore = teachersFounded.filter(teacher => teacher.score_teachers.length > 0)
+    
+    return res.status(codes.OK_CODE).json(teachersWithScore)
+  })
+  .catch(handleError(res))
+}
+
 module.exports = {
   signUp,
-  signIn
+  signIn,
+  getTeachersByScore
 }

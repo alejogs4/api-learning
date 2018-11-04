@@ -2,9 +2,13 @@ const Sequelize = require('sequelize')
 const sequelize = require('../connection')()
 
 const Article = sequelize.define('article', {
+  id_article: {
+    type: Sequelize.INTEGER,
+    primaryKey: true,
+    allowNull: false
+  },
   dni_teacher: {
     type: Sequelize.STRING(20),
-    primaryKey: true,
     allowNull: false
   },
 

@@ -1,5 +1,4 @@
 const { Student } = require('../../database/index')
-const { createToken } = require('../../auth/token')
 const { 
   codes, 
   handleError, 
