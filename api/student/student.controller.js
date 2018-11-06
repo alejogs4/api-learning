@@ -39,7 +39,7 @@ function signIn(req, res) {
   const { password, email } = req.body
 
   Student.find({
-    attributes: ['dni_students', 'name', 'lastname', 'email', 'degree'],
+    attributes: ['dni_student', 'name', 'lastname', 'email', 'degree'],
     where: { email, password  }
   })
   .then(student => {
