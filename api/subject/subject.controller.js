@@ -21,6 +21,10 @@ function teachersBySubject(req, res) {
       {model: Subjects, where: {name}}
     ],
   })
+  .then(teacher => {
+    const teachers = JSON.parse(JSON.stringify(teacher)).map(teacher => teacher.teacher)
+    return teachers
+  })
   .then(manageData(res))
   .catch(handleError(res))
 }
