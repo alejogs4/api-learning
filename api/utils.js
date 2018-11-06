@@ -38,7 +38,7 @@ const deletePassword = obj => {
 
 const generateToken = data => {
   const token = `${createToken(data)}`
-  return { data, token }
+  return data
 }
 
 module.exports = {
