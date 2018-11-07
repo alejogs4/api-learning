@@ -69,10 +69,19 @@ function getArticleByTeacher(req, res) {
   .catch(handleError(res))
 }
 
+function createArticle(req, res) {
+  const article = Article.build(req.body)
+
+  return article.save()
+    .then(manageData(res, codes.CREATED))
+    .then(handleError(res))
+}
+
 module.exports = {
   getArticleByDate,
   getArticlesWithAutorData,
   getArticlesWithAutorDataById,
   getArticlesByScore,
-  getArticleByTeacher
+  getArticleByTeacher,
+  createArticle
 }
