@@ -5,7 +5,8 @@ const Article = sequelize.define('article', {
   id_article: {
     type: Sequelize.INTEGER,
     primaryKey: true,
-    allowNull: false
+    allowNull: false,
+    autoIncrement: true
   },
   dni_teacher: {
     type: Sequelize.STRING(20),
