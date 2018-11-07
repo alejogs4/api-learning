@@ -74,7 +74,7 @@ function createArticle(req, res) {
 
   return article.save()
     .then(manageData(res, codes.CREATED))
-    .then(handleError(res))
+    .catch(handleError(res))
 }
 
 module.exports = {
