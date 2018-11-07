@@ -29,6 +29,13 @@ function teachersBySubject(req, res) {
   .catch(handleError(res))
 }
 
+function getSubjects(req, res) {
+  return Subjects.findAll()
+    .then(manageData(res))
+    .catch(handleError(res))
+}
+
 module.exports = {
-  teachersBySubject
+  teachersBySubject,
+  getSubjects
 }
