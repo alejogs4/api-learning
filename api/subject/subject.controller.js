@@ -35,7 +35,16 @@ function getSubjects(req, res) {
     .catch(handleError(res))
 }
 
+function addSubjectToTeacher(req, res) {
+  const newSubject = SubjectTeacher.build(req.body)
+
+  return newSubject.save()
+    .then(manageData(res, codes.CREATED))
+    .catch(handleError(res))
+}
+
 module.exports = {
   teachersBySubject,
-  getSubjects
+  getSubjects,
+  addSubjectToTeacher
 }
